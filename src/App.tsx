@@ -1,3 +1,4 @@
+import { BookList } from './components/BookList'
 import './App.css'
 
 function App() {
@@ -23,19 +24,10 @@ function App() {
           <section className="app-panel" aria-label="Book list">
             <div className="app-panel-header">
               <h2 className="app-panel-title">Your reading list</h2>
-              <p className="app-panel-meta">Books will appear here from markdown files.</p>
+              <p className="app-panel-meta">Books loaded from markdown files in src/books/.</p>
             </div>
 
-            <div className="app-empty-state">
-              <p className="app-empty-title">
-                No books yet – but the shelf is ready.
-              </p>
-              <p className="app-empty-body">
-                Once we wire up the markdown loader, each{' '}
-                <code>src/books/*.md</code> file will show up here as a book
-                card with a thumbnail, title, and author.
-              </p>
-            </div>
+            <BookList />
           </section>
         </main>
 
