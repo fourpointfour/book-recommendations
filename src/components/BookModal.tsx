@@ -1,4 +1,6 @@
 import type { Book } from '../types/book'
+import ReactMarkdown from 'react-markdown'
+import bookIcon from '../assets/book-icon.png'
 import { RatingStars } from './RatingStars'
 import './BookModal.css'
 
@@ -49,11 +51,16 @@ export function BookModal({ book, open, onClose }: BookModalProps) {
                 src={meta.image}
                 alt={`Cover of ${meta.title}`}
                 className="book-modal-thumb-img"
+                onError={(event) => {
+                  event.currentTarget.src = bookIcon
+                }}
               />
             ) : (
-              <div className="book-modal-thumb-placeholder" aria-hidden="true">
-                <span className="book-modal-thumb-icon">📘</span>
-              </div>
+              <img
+                src={bookIcon}
+                alt={`Default cover for ${meta.title}`}
+                className="book-modal-thumb-img"
+              />
             )}
           </div>
           <div className="book-modal-header-text">
@@ -88,7 +95,7 @@ export function BookModal({ book, open, onClose }: BookModalProps) {
             <h3 className="book-modal-notes-title">Personal notes</h3>
             <div className="book-modal-notes-body">
               {notes.trim().length > 0 ? (
-                <p>{notes}</p>
+                <ReactMarkdown>{notes}</ReactMarkdown>
               ) : (
                 <p className="book-modal-notes-empty">
                   No notes yet. Add markdown content below the frontmatter in
