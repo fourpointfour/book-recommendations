@@ -33,6 +33,7 @@
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-md);
   transition: box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .book-list-item:hover {
