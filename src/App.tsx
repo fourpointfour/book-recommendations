@@ -32,11 +32,8 @@ function App() {
         </main>
 
         <footer className="app-footer">
-          <span>Step 1 · Project scaffold & theme</span>
-          <span>
-            Future steps: add markdown books, detail popups, and automatic
-            GitHub Pages deploys.
-          </span>
+          <span>Markdown-powered · Click a book for details</span>
+          <span>Deployed from this repo via GitHub Pages (coming up next).</span>
         </footer>
       </div>
     </div>
