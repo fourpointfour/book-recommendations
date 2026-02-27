@@ -1,4 +1,5 @@
 import type { Book } from '../types/book'
+import { RatingStars } from './RatingStars'
 import './BookModal.css'
 
 interface BookModalProps {
@@ -67,7 +68,7 @@ export function BookModal({ book, open, onClose }: BookModalProps) {
           <div className="book-modal-row">
             <span className="book-modal-label">Rating</span>
             <span className="book-modal-value">
-              {meta.rating} (stars coming next step)
+              <RatingStars rating={meta.ratingValue} />
             </span>
           </div>
 
