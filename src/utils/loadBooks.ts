@@ -71,7 +71,11 @@ function toSlug(path: string): string {
 export function loadBooks(): Book[] {
   const modules = bookFiles as unknown as RawModuleMap
 
-  const books: Book[] = Object.entries(modules).map(([path, rawContent]) => {
+  const entries = Object.entries(modules).filter(([path]) => {
+    return !path.endsWith('example-book.md')
+  })
+
+  const books: Book[] = entries.map(([path, rawContent]) => {
     const { frontmatter, body } = parseFrontmatter(rawContent)
 
     const slug = toSlug(path)
