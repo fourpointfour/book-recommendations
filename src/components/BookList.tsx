@@ -1,5 +1,6 @@
 import type { Book } from '../types/book'
 import { loadBooks } from '../utils/loadBooks'
+import { BookListItem } from './BookListItem'
 import './BookList.css'
 
 export function BookList() {
@@ -19,8 +20,7 @@ export function BookList() {
     <ul className="book-list" aria-label="Book recommendations">
       {books.map((book) => (
         <li key={book.id} className="book-list-item">
-          <span className="book-list-item-title">{book.meta.title}</span>
-          <span className="book-list-item-author">{book.meta.author}</span>
+          <BookListItem book={book} />
         </li>
       ))}
     </ul>
