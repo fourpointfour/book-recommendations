@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import type { Book } from '../types/book'
 import ReactMarkdown from 'react-markdown'
 import bookIcon from '../assets/book-icon.png'
@@ -11,6 +12,21 @@ interface BookModalProps {
 }
 
 export function BookModal({ book, open, onClose }: BookModalProps) {
+  useEffect(() => {
+    if (!open) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [open, onClose])
+
   if (!open || !book) return null
 
   const { meta, notes } = book
