@@ -12,5 +12,5 @@ It's a very short story revolving around Lucas and how he perceives life and hap
 
 ### Favorite ideas
 
-- Love is not to never find. Love is always making up.
+- Love is not to never fight. Love is always making up.
 
