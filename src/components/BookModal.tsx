@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import type { Book } from '../types/book'
 import ReactMarkdown from 'react-markdown'
 import bookIcon from '../assets/book-icon.png'
@@ -12,18 +12,63 @@ interface BookModalProps {
 }
 
 export function BookModal({ book, open, onClose }: BookModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null)
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null)
+
   useEffect(() => {
     if (!open) return
+
+    previouslyFocusedRef.current = document.activeElement as HTMLElement | null
+
+    const getFocusables = (): HTMLElement[] => {
+      const root = modalRef.current
+      if (!root) return []
+      return Array.from(
+        root.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), ' +
+            'select:not([disabled]), textarea:not([disabled]), ' +
+            '[tabindex]:not([tabindex="-1"])',
+        ),
+      )
+    }
+
+    queueMicrotask(() => getFocusables()[0]?.focus())
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose()
+        return
+      }
+      if (event.key !== 'Tab') return
+
+      const focusables = getFocusables()
+      if (focusables.length === 0) {
+        event.preventDefault()
+        return
+      }
+
+      const first = focusables[0]
+      const last = focusables[focusables.length - 1]
+      const active = document.activeElement as HTMLElement | null
+      const insideModal = modalRef.current?.contains(active ?? null) ?? false
+
+      if (event.shiftKey) {
+        if (!insideModal || active === first) {
+          event.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (!insideModal || active === last) {
+          event.preventDefault()
+          first.focus()
+        }
       }
     }
 
     document.addEventListener('keydown', handleKeyDown)
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
+      previouslyFocusedRef.current?.focus()
     }
   }, [open, onClose])
 
@@ -46,6 +91,7 @@ export function BookModal({ book, open, onClose }: BookModalProps) {
       onClick={handleBackdropClick}
     >
       <div
+        ref={modalRef}
         className="book-modal"
         role="dialog"
         aria-modal="true"
