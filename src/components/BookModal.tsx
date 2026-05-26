@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import type { Book } from '../types/book'
 import ReactMarkdown from 'react-markdown'
 import bookIcon from '../assets/book-icon.png'
@@ -12,6 +12,8 @@ interface BookModalProps {
 }
 
 export function BookModal({ book, open, onClose }: BookModalProps) {
+  const previouslyFocused = useRef<HTMLElement | null>(null)
+
   useEffect(() => {
     if (!open) return
 
@@ -39,6 +41,8 @@ export function BookModal({ book, open, onClose }: BookModalProps) {
 
   useEffect(() => {
     if (!open) return
+
+    previouslyFocused.current = document.activeElement as HTMLElement | null
 
     const modalRoot = document.querySelector<HTMLElement>('.book-modal')
     if (!modalRoot) return
@@ -79,6 +83,10 @@ export function BookModal({ book, open, onClose }: BookModalProps) {
 
     return () => {
       document.removeEventListener('keydown', handleTab)
+      const restore = previouslyFocused.current
+      if (restore && typeof restore.focus === 'function') {
+        requestAnimationFrame(() => restore.focus())
+      }
     }
   }, [open])
 
