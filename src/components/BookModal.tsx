@@ -110,10 +110,11 @@ export function BookModal({ book, open, onClose }: BookModalProps) {
             <a
               href={meta.buyLink}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="book-modal-link"
             >
-              Open link in new tab
+              Buy this book
+              <span className="sr-only"> (opens in a new tab)</span>
             </a>
           </div>
 
