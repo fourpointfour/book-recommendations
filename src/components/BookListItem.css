@@ -47,3 +47,9 @@
   font-size: 0.9rem;
   color: var(--color-text-muted);
 }
+
+.book-list-item-rating {
+  margin-top: 0.15rem;
+  display: inline-flex;
+  align-items: center;
+}

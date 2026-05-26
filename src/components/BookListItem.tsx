@@ -1,5 +1,6 @@
 import type { Book } from '../types/book'
 import bookIcon from '../assets/book-icon.png'
+import { RatingStars } from './RatingStars'
 import './BookListItem.css'
 
 interface BookListItemProps {
@@ -33,6 +34,9 @@ export function BookListItem({ book }: BookListItemProps) {
       <div className="book-list-item-text">
         <span className="book-list-item-title">{meta.title}</span>
         <span className="book-list-item-author">{meta.author}</span>
+        <span className="book-list-item-rating">
+          <RatingStars rating={meta.ratingValue} />
+        </span>
       </div>
     </div>
   )
