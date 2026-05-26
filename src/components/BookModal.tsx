@@ -37,6 +37,51 @@ export function BookModal({ book, open, onClose }: BookModalProps) {
     }
   }, [open])
 
+  useEffect(() => {
+    if (!open) return
+
+    const modalRoot = document.querySelector<HTMLElement>('.book-modal')
+    if (!modalRoot) return
+
+    const FOCUSABLE_SELECTOR =
+      'button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
+    const getFocusable = () =>
+      Array.from(modalRoot.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR))
+
+    const handleTab = (event: KeyboardEvent) => {
+      if (event.key !== 'Tab') return
+
+      const focusable = getFocusable()
+      if (focusable.length === 0) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      const active = document.activeElement as HTMLElement | null
+
+      if (event.shiftKey) {
+        if (active === first || !modalRoot.contains(active)) {
+          event.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (active === last) {
+          event.preventDefault()
+          first.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleTab)
+
+    const initialFocusTarget = modalRoot.querySelector<HTMLElement>('.book-modal-close')
+    initialFocusTarget?.focus()
+
+    return () => {
+      document.removeEventListener('keydown', handleTab)
+    }
+  }, [open])
+
   if (!open || !book) return null
 
   const { meta, notes } = book
