@@ -33,7 +33,13 @@ function App() {
 
         <footer className="app-footer">
           <span>Markdown-powered · Click a book for details</span>
-          <span>Deployed from this repo via GitHub Pages (coming up next).</span>
+          <a
+            href="https://github.com/fourpointfour/book-recommendations"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View source on GitHub
+          </a>
         </footer>
       </div>
     </div>
