@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import type { Book } from '../types/book'
-import { loadBooks } from '../utils/loadBooks'
 import { BookListItem } from './BookListItem'
 import { BookModal } from './BookModal'
 import './BookList.css'
 
-export function BookList() {
-  const books: Book[] = loadBooks()
+interface BookListProps {
+  books: Book[]
+}
+
+export function BookList({ books }: BookListProps) {
   const [activeBook, setActiveBook] = useState<Book | null>(null)
 
   if (books.length === 0) {

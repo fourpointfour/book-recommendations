@@ -1,7 +1,10 @@
 import { BookList } from './components/BookList'
+import { loadBooks } from './utils/loadBooks'
 import './App.css'
 
 function App() {
+  const books = loadBooks()
+
   return (
     <div className="app-root">
       <div className="app-shell">
@@ -16,7 +19,7 @@ function App() {
           </div>
           <div className="app-badge" aria-hidden="true">
             <span className="app-badge-dot" />
-            Markdown-driven
+            {books.length} book{books.length === 1 ? '' : 's'}
           </div>
         </header>
 
@@ -24,10 +27,10 @@ function App() {
           <section className="app-panel" aria-label="Book list">
             <div className="app-panel-header">
               <h2 className="app-panel-title">Your reading list</h2>
-              <p className="app-panel-meta">Books loaded from markdown files in src/books/.</p>
+              <p className="app-panel-meta">Sorted alphabetically by title.</p>
             </div>
 
-            <BookList />
+            <BookList books={books} />
           </section>
         </main>
 
