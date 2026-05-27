@@ -120,7 +120,20 @@ export function BookModal({ book, open, onClose }: BookModalProps) {
           onClick={onClose}
           aria-label="Close book details"
         >
-          ×
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M3 3 L13 13 M13 3 L3 13"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+            />
+          </svg>
         </button>
 
         <div className="book-modal-header">
