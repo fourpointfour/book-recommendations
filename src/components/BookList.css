@@ -31,13 +31,15 @@
   padding: 0.85rem 1rem;
   background: var(--color-surface);
   border: 1px solid var(--color-border-subtle);
+  border-left: 3px solid transparent;
   border-radius: var(--radius-md);
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
   cursor: pointer;
 }
 
 .book-list-item:hover {
   box-shadow: var(--shadow-soft);
+  border-left-color: var(--color-accent-primary);
 }
 
 .book-list-item:focus-visible {
