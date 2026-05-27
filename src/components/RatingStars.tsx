@@ -9,7 +9,11 @@ export function RatingStars({ rating, max = 5 }: RatingStarsProps) {
   const safeRating = Math.min(Math.max(rating, 0), max)
 
   return (
-    <div className="rating-stars" aria-hidden="true">
+    <div
+      className="rating-stars"
+      role="img"
+      aria-label={`Rated ${safeRating} out of ${max} stars`}
+    >
       {Array.from({ length: max }).map((_, index) => {
         const starNumber = index + 1
         const isFull = safeRating >= starNumber
