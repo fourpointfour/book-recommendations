@@ -14,7 +14,7 @@ A Node.js CLI script (`npm run add-book`) that searches Open Library for book me
 2. Prompt: "Search for a book:" — user types a title or author.
 3. Hit Open Library Search API — display top 5 results (title, author, year).
 4. User picks one — auto-fill: title, author, cover image URL (Open Library Covers API), and a default buy link (Open Library edition page).
-5. Prompt: "Rating (e.g. 4.5/5):" — user types it.
+5. Prompt: "Rating (e.g. 4.5/5):" — user types it. Validated to match the `X/5` or `X.X/5` format before proceeding; re-prompts on invalid input.
 6. Prompt: "Buy link (press Enter to use Open Library link):" — allows override with a custom URL.
 7. Opens `$EDITOR` with a pre-filled markdown template for the notes section ("Why I recommend this book" + "Favorite ideas" structure).
 8. On save and close, the `.md` file is written to `src/books/<slug>.md`.
