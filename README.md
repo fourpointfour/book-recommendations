@@ -72,6 +72,22 @@ npm run lint        # Lint the codebase
 
 ## How to add a book
 
+### Using the CLI (recommended)
+
+```bash
+# Add a single book
+npm run add-book
+
+# Add multiple books in one session
+npm run add-book -- --batch
+```
+
+The script searches Open Library for the book, auto-fills the cover image and a default buy link (Open Library page), lets you override the buy link with your own URL, and opens your `$EDITOR` for notes. The `.md` file is written to `src/books/` when you close the editor.
+
+Once the file is created, commit and push — GitHub Pages will deploy automatically.
+
+### Adding manually
+
 1. Create a new `.md` file in `src/books/`. Use an existing file as a template — e.g. [`src/books/and-then-there-were-none.md`](src/books/and-then-there-were-none.md).
 2. Fill in the frontmatter:
 
@@ -79,9 +95,9 @@ npm run lint        # Lint the codebase
 ---
 title: "Book Title"
 author: "Author Name"
-image: "https://..."        # Cover image URL (Google Books works well)
-rating: "4/5"               # Your rating
-buyLink: "https://..."      # Optional purchase link
+image: "https://..."        # Cover image URL
+rating: "4/5"               # Your rating (X/5 or X.X/5)
+buyLink: "https://..."      # Purchase or info link
 ---
 ```
 
