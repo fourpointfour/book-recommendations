@@ -86,10 +86,22 @@ async function main() {
   const rl = rlPromises.createInterface({ input, output })
   const created = []
 
-  const result = await addBook(rl)
-  if (result) created.push(result)
+  do {
+    const result = await addBook(rl)
+    if (result) created.push(result)
+
+    if (isBatch) {
+      const again = (await rl.question('\nAdd another book? (y/n): ')).trim().toLowerCase()
+      if (again !== 'y') break
+    }
+  } while (isBatch)
 
   rl.close()
+
+  if (isBatch && created.length > 0) {
+    console.log(`\n--- ${created.length} book(s) added ---`)
+    created.forEach(b => console.log(`  "${b.title}" → src/books/${b.slug}.md`))
+  }
 }
 
 main().catch(err => {
