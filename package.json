@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "add-book": "node scripts/add-book.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",
