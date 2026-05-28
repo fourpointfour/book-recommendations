@@ -12,13 +12,14 @@ export function BookListItem({ book }: BookListItemProps) {
   const hasImage = meta.image && meta.image.trim().length > 0
 
   return (
-    <div className="book-list-item-content">
-      <div className="book-list-item-thumb">
+    <div className="book-card">
+      <div className="book-card-cover">
         {hasImage ? (
           <img
             src={meta.image}
             alt={`Cover of ${meta.title}`}
-            className="book-list-item-thumb-img"
+            className="book-card-cover-img"
+            loading="lazy"
             onError={(event) => {
               event.currentTarget.src = bookIcon
             }}
@@ -27,16 +28,23 @@ export function BookListItem({ book }: BookListItemProps) {
           <img
             src={bookIcon}
             alt={`Default cover for ${meta.title}`}
-            className="book-list-item-thumb-img"
+            className="book-card-cover-img"
           />
         )}
-      </div>
-      <div className="book-list-item-text">
-        <span className="book-list-item-title">{meta.title}</span>
-        <span className="book-list-item-author">{meta.author}</span>
-        <span className="book-list-item-rating">
-          <RatingStars rating={meta.ratingValue} />
+        <span className="book-card-badge" aria-hidden="true">
+          <span className="book-card-badge-star">&#9733;</span>
+          {' '}{meta.ratingValue}
         </span>
+        <div className="book-card-hover-overlay" aria-hidden="true">
+          <span>Click for details</span>
+        </div>
+      </div>
+      <div className="book-card-info">
+        <span className="book-card-title">{meta.title}</span>
+        <span className="book-card-author">{meta.author}</span>
+        <div className="book-card-rating">
+          <RatingStars rating={meta.ratingValue} />
+        </div>
       </div>
     </div>
   )

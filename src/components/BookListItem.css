@@ -1,54 +1,105 @@
-.book-list-item-content {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  min-width: 0;
-}
-
-.book-list-item-thumb {
-  flex-shrink: 0;
-  width: 56px;
-  height: 84px;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  background: var(--color-accent-primary-soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.book-list-item-thumb-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.book-list-item-thumb-icon {
-  width: 28px;
-  height: 28px;
-  color: var(--color-accent-primary);
-  opacity: 0.7;
-}
-
-.book-list-item-text {
+/* ── Card shell ── */
+.book-card {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  min-width: 0;
+  height: 100%;
 }
 
-.book-list-item-title {
+/* ── Cover image area ── */
+.book-card-cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  background: var(--color-accent-primary-soft);
+  overflow: hidden;
+}
+
+.book-card-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Rating badge (top-right corner) ── */
+.book-card-badge {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 0.68rem;
   font-weight: 600;
-  color: var(--color-text);
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  pointer-events: none;
+}
+
+.book-card-badge-star {
+  color: var(--color-accent-secondary);
+}
+
+/* ── Hover gradient overlay ── */
+.book-card-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.6rem;
+}
+
+.book-card-hover-overlay span {
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.book-list-item:hover .book-card-hover-overlay {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-card-hover-overlay {
+    transition: none;
+  }
+}
+
+/* ── Info area below cover ── */
+.book-card-info {
+  padding: 0.5rem 0.55rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  flex: 1;
+}
+
+.book-card-title {
+  font-weight: 600;
+  font-size: 0.78rem;
   line-height: 1.3;
+  color: var(--color-text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.book-list-item-author {
-  font-size: 0.9rem;
+.book-card-author {
+  font-size: 0.72rem;
   color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.book-list-item-rating {
+.book-card-rating {
   margin-top: 0.15rem;
   display: inline-flex;
   align-items: center;

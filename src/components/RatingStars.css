@@ -34,3 +34,17 @@
   color: var(--color-text-muted);
 }
 
+/* Compact size when inside grid card */
+.book-card-rating .rating-stars-star {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.book-card-rating .rating-stars-star-base,
+.book-card-rating .rating-stars-star-fill {
+  font-size: 0.85rem;
+}
+
+.book-card-rating .rating-stars-label {
+  font-size: 0.65rem;
+}

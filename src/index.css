@@ -8,6 +8,7 @@
   --color-accent-primary-soft: rgba(15, 118, 110, 0.08);
   --color-accent-secondary: #f97316; /* orange */
   --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-raised: 0 12px 28px rgba(15, 23, 42, 0.12);
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
