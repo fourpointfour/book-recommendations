@@ -1,7 +1,7 @@
 ---
 title: "And Then There Were None"
 author: "Agatha Christie"
-image: "https://books.google.co.in/books/content?id=bx96xJ9_b88C&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73CWJhg25ypmoHkmtioWXXGmZGilxTV9vI0cZgfuGLjJVYkSBpPB6lqtV3lTlGZroEz5_mzuHi137TijpJqNqgqe1lYRJ-MoRYZ871xtJZmCapNzHGuHMrCi04zl9YlGLgoUKEW"
+image: "https://covers.openlibrary.org/b/id/11172296-L.jpg"
 rating: "4.5/5"
 buyLink: "https://amzn.in/d/0cnLETdT"
 ---

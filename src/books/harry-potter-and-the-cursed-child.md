@@ -1,7 +1,7 @@
 ---
 title: "Harry Potter and The Cursed Child"
 author: "Jack Thorne & John Tiffany"
-image: "https://images-na.ssl-images-amazon.com/images/P/1338099132.01._SX300_SY600_SCLZZZZZZZ_.jpg"
+image: "https://covers.openlibrary.org/b/id/8763851-L.jpg"
 rating: "1/5"
 buyLink: "https://amzn.in/d/0fpgf1iN"
 ---

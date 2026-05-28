@@ -1,7 +1,7 @@
 ---
 title: "The Answer Is No"
 author: "Fredrik Backman"
-image: "https://m.media-amazon.com/images/I/91wMNinEhhL._UF1000,1000_QL80_.jpg"
+image: "https://covers.openlibrary.org/b/id/15176754-L.jpg"
 rating: "4/5"
 buyLink: "https://amzn.in/d/0hSNPy3v"
 ---
