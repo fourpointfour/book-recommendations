@@ -1,6 +1,7 @@
 ---
 title: "The Forest of Enchantments: A feminist retelling of Ramayana's "
 author: "Chitra Banerjee Divakaruni"
+image: "https://covers.openlibrary.org/b/id/15224810-L.jpg"
 rating: "5/5"
 buyLink: "https://amzn.in/d/0a6pdxhc"
 ---
