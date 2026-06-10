@@ -1,11 +1,14 @@
 import * as rlPromises from 'node:readline/promises'
 import { stdin as input, stdout as output } from 'node:process'
+import { execSync } from 'node:child_process'
 import { searchBooks, buildCoverUrl, buildOpenLibraryLink } from './lib/open-library.mjs'
 import { openInEditor } from './lib/editor.mjs'
 import { slugify, validateRating } from './lib/book-utils.mjs'
 import { fileExists, writeBookFile } from './lib/book-file.mjs'
 
 export const isBatch = process.argv.includes('--batch')
+const doCommit = process.argv.includes('--commit') || process.argv.includes('--push')
+const doPush = process.argv.includes('--push')
 
 export async function addBook(rl) {
   const query = (await rl.question('\nSearch for a book: ')).trim()
@@ -101,6 +104,33 @@ async function main() {
   if (isBatch && created.length > 0) {
     console.log(`\n--- ${created.length} book(s) added ---`)
     created.forEach(b => console.log(`  "${b.title}" → src/books/${b.slug}.md`))
+  }
+
+  if (doCommit && created.length > 0) {
+    const commitMsg =
+      created.length === 1
+        ? `book: ${created[0].title}`
+        : 'book: added multiple books to the shelf'
+
+    const filePaths = created.map(b => `src/books/${b.slug}.md`).join(' ')
+    try {
+      execSync(`git add ${filePaths}`, { stdio: 'inherit' })
+      execSync(`git commit -m "${commitMsg}"`, { stdio: 'inherit' })
+      console.log(`\n✓ Committed: "${commitMsg}"`)
+    } catch (err) {
+      console.error(`\nGit commit failed: ${err.message}`)
+      process.exit(1)
+    }
+
+    if (doPush) {
+      try {
+        execSync('git push', { stdio: 'inherit' })
+        console.log('✓ Pushed to remote')
+      } catch (err) {
+        console.error(`\nGit push failed: ${err.message}`)
+        process.exit(1)
+      }
+    }
   }
 }
 
