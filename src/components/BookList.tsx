@@ -12,6 +12,7 @@ interface BookListProps {
 export function BookList({ books }: BookListProps) {
   const [activeBook, setActiveBook] = useState<Book | null>(null)
   const listRef = useRef<HTMLUListElement>(null)
+  const openedWithKeyboard = useRef(false)
 
   useEffect(() => {
     const list = listRef.current
@@ -55,18 +56,34 @@ export function BookList({ books }: BookListProps) {
   }
 
   const handleItemClick = (book: Book) => {
+    openedWithKeyboard.current = false
     setActiveBook(book)
   }
 
   const handleItemKeyDown = (event: React.KeyboardEvent<HTMLLIElement>, book: Book) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
+      openedWithKeyboard.current = true
       setActiveBook(book)
     }
   }
 
   const handleCloseModal = () => {
     setActiveBook(null)
+
+    // The modal restores focus to the card on close (needed for keyboard
+    // navigation), which leaves a focus ring behind. If the book was opened
+    // with the mouse, drop that focus once the restoration has run.
+    if (!openedWithKeyboard.current) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const active = document.activeElement
+          if (active instanceof HTMLElement && active.classList.contains('book-list-item')) {
+            active.blur()
+          }
+        })
+      })
+    }
   }
 
   return (
