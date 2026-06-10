@@ -5,47 +5,48 @@ import './BookListItem.css'
 
 interface BookListItemProps {
   book: Book
+  index?: number
 }
 
-export function BookListItem({ book }: BookListItemProps) {
+export function BookListItem({ book, index = 0 }: BookListItemProps) {
   const { meta } = book
   const hasImage = meta.image && meta.image.trim().length > 0
 
   return (
-    <div className="book-card">
-      <div className="book-card-cover">
-        {hasImage ? (
-          <img
-            src={meta.image}
-            alt={`Cover of ${meta.title}`}
-            className="book-card-cover-img"
-            loading="lazy"
-            onError={(event) => {
-              event.currentTarget.src = bookIcon
-            }}
-          />
-        ) : (
-          <img
-            src={bookIcon}
-            alt={`Default cover for ${meta.title}`}
-            className="book-card-cover-img"
-          />
-        )}
-        <span className="book-card-badge" aria-hidden="true">
-          <span className="book-card-badge-star">&#9733;</span>
-          {' '}{meta.ratingValue}
-        </span>
-        <div className="book-card-hover-overlay" aria-hidden="true">
-          <span>Click for details</span>
+    <article className="volume">
+      <div className="volume-stage">
+        <div className="volume-book">
+          <span className="volume-spine" aria-hidden="true" />
+          <span className="volume-pages" aria-hidden="true" />
+          <div className="volume-cover">
+            <img
+              src={hasImage ? meta.image : bookIcon}
+              alt={hasImage ? `Cover of ${meta.title}` : `Default cover for ${meta.title}`}
+              className="volume-cover-img"
+              loading="lazy"
+              onError={(event) => {
+                event.currentTarget.src = bookIcon
+              }}
+            />
+            <span className="volume-sheen" aria-hidden="true" />
+          </div>
         </div>
+        <span className="volume-shadow" aria-hidden="true" />
+        <span className="volume-peek" aria-hidden="true">
+          Open the notes
+        </span>
       </div>
-      <div className="book-card-info">
-        <span className="book-card-title">{meta.title}</span>
-        <span className="book-card-author">{meta.author}</span>
-        <div className="book-card-rating">
+
+      <div className="volume-meta">
+        <span className="volume-index" aria-hidden="true">
+          № {String(index + 1).padStart(2, '0')}
+        </span>
+        <h3 className="volume-title">{meta.title}</h3>
+        <p className="volume-author">{meta.author}</p>
+        <div className="volume-rating">
           <RatingStars rating={meta.ratingValue} />
         </div>
       </div>
-    </div>
+    </article>
   )
 }

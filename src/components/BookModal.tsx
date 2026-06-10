@@ -136,70 +136,73 @@ export function BookModal({ book, open, onClose }: BookModalProps) {
           </svg>
         </button>
 
-        <div className="book-modal-header">
-          <div className="book-modal-thumb">
-            {hasImage ? (
-              <img
-                src={meta.image}
-                alt={`Cover of ${meta.title}`}
-                className="book-modal-thumb-img"
-                onError={(event) => {
-                  event.currentTarget.src = bookIcon
-                }}
-              />
-            ) : (
-              <img
-                src={bookIcon}
-                alt={`Default cover for ${meta.title}`}
-                className="book-modal-thumb-img"
-              />
-            )}
-          </div>
-          <div className="book-modal-header-text">
-            <h2 id={labelId} className="book-modal-title">
-              {meta.title}
-            </h2>
-            <p className="book-modal-author">{meta.author}</p>
-          </div>
-        </div>
+        <span className="book-modal-ribbon" aria-hidden="true" />
 
-        <div className="book-modal-body">
-          <div className="book-modal-row">
-            <span className="book-modal-label">Rating</span>
-            <span className="book-modal-value">
-              <RatingStars rating={meta.ratingValue} />
-            </span>
+        <aside className="book-modal-plate">
+          <div className="book-modal-plate-cover">
+            <img
+              src={hasImage ? meta.image : bookIcon}
+              alt={hasImage ? `Cover of ${meta.title}` : `Default cover for ${meta.title}`}
+              className="book-modal-plate-img"
+              onError={(event) => {
+                event.currentTarget.src = bookIcon
+              }}
+            />
           </div>
 
-          <div className="book-modal-row">
-            <span className="book-modal-label">Get this book</span>
-            <a
-              href={meta.buyLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="book-modal-link"
+          <div className="book-modal-plate-rating">
+            <RatingStars rating={meta.ratingValue} />
+          </div>
+
+          <a
+            href={meta.buyLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="book-modal-buy"
+          >
+            Buy this book
+            <span className="sr-only"> (opens in a new tab)</span>
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 12 12"
+              fill="none"
+              aria-hidden="true"
             >
-              Buy this book
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
-          </div>
+              <path
+                d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+        </aside>
+
+        <div className="book-modal-page">
+          <p className="book-modal-kicker">From the shelves of Vaibhav</p>
+          <h2 id={labelId} className="book-modal-title">
+            {meta.title}
+          </h2>
+          <p className="book-modal-author">by {meta.author}</p>
+
+          <p className="book-modal-rule" aria-hidden="true">
+            ❦
+          </p>
 
           <div className="book-modal-notes">
-            <h3 className="book-modal-notes-title">Personal notes</h3>
-            <div className="book-modal-notes-body">
-              {notes.trim().length > 0 ? (
-                <ReactMarkdown>{notes}</ReactMarkdown>
-              ) : (
-                <p className="book-modal-notes-empty">
-                  No notes yet. Add markdown content below the frontmatter in
-                  this book&apos;s file to see it here.
-                </p>
-              )}
-            </div>
+            {notes.trim().length > 0 ? (
+              <ReactMarkdown>{notes}</ReactMarkdown>
+            ) : (
+              <p className="book-modal-notes-empty">
+                No notes yet. Add markdown content below the frontmatter in
+                this book&apos;s file to see it here.
+              </p>
+            )}
           </div>
         </div>
       </div>
     </div>
   )
 }
-
