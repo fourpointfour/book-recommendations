@@ -136,56 +136,39 @@ export function BookModal({ book, open, onClose }: BookModalProps) {
           </svg>
         </button>
 
-        <div className="book-modal-header">
-          <div className="book-modal-thumb">
-            {hasImage ? (
-              <img
-                src={meta.image}
-                alt={`Cover of ${meta.title}`}
-                className="book-modal-thumb-img"
-                onError={(event) => {
-                  event.currentTarget.src = bookIcon
-                }}
-              />
-            ) : (
-              <img
-                src={bookIcon}
-                alt={`Default cover for ${meta.title}`}
-                className="book-modal-thumb-img"
-              />
-            )}
+        {/* — Left: cinematic 3D cover plate — */}
+        <aside className="book-modal-plate">
+          <div className="book-modal-cover">
+            <img
+              src={hasImage ? meta.image : bookIcon}
+              alt={`Cover of ${meta.title}`}
+              className="book-modal-cover-img"
+              onError={(event) => {
+                event.currentTarget.src = bookIcon
+              }}
+            />
+            <span className="book-modal-cover-pages" aria-hidden="true" />
           </div>
-          <div className="book-modal-header-text">
+        </aside>
+
+        {/* — Right: details — */}
+        <div className="book-modal-body">
+          <header className="book-modal-head">
+            <p className="kicker">From the shelf</p>
             <h2 id={labelId} className="book-modal-title">
               {meta.title}
             </h2>
-            <p className="book-modal-author">{meta.author}</p>
-          </div>
-        </div>
-
-        <div className="book-modal-body">
-          <div className="book-modal-row">
-            <span className="book-modal-label">Rating</span>
-            <span className="book-modal-value">
+            <p className="book-modal-author">by {meta.author}</p>
+            <div className="book-modal-rating">
               <RatingStars rating={meta.ratingValue} />
-            </span>
-          </div>
-
-          <div className="book-modal-row">
-            <span className="book-modal-label">Get this book</span>
-            <a
-              href={meta.buyLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="book-modal-link"
-            >
-              Buy this book
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
-          </div>
+            </div>
+          </header>
 
           <div className="book-modal-notes">
-            <h3 className="book-modal-notes-title">Personal notes</h3>
+            <h3 className="book-modal-notes-title">
+              <span className="book-modal-notes-rule" aria-hidden="true" />
+              <span className="sr-only">Notes</span>
+            </h3>
             <div className="book-modal-notes-body">
               {notes.trim().length > 0 ? (
                 <ReactMarkdown>{notes}</ReactMarkdown>
@@ -197,6 +180,25 @@ export function BookModal({ book, open, onClose }: BookModalProps) {
               )}
             </div>
           </div>
+
+          <a
+            href={meta.buyLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="book-modal-link"
+          >
+            Acquire this book
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M7 17 17 7M9 7h8v8"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
         </div>
       </div>
     </div>

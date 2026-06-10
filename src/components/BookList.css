@@ -1,59 +1,81 @@
-.book-list {
+.shelf-grid {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: clamp(1.75rem, 3vw, 3rem) clamp(1.25rem, 2.5vw, 2.25rem);
 }
 
-.book-list--empty {
-  padding: 1.25rem 0;
+/* Reveal-on-scroll slot */
+.shelf-slot {
+  opacity: 0;
+  transform: translateY(28px) scale(0.97);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  border-radius: var(--r-md);
+  outline: none;
+  cursor: pointer;
 }
 
-.book-list-empty-message {
-  margin: 0;
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
+.shelf-slot.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
-.book-list-empty-message code {
-  font-size: 0.9em;
-  padding: 0.15rem 0.4rem;
-  background: var(--color-accent-primary-soft);
-  border-radius: var(--radius-sm);
+.shelf-slot:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 8px;
 }
 
-.book-list-item {
+/* ============================== EMPTY STATE ============================== */
+.shelf-empty {
   display: flex;
   flex-direction: column;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+  padding: 4rem 1.5rem;
+  border: 1px dashed var(--ink-line-strong);
+  border-radius: var(--r-lg);
+  background: var(--glass);
+  color: var(--paper-dim);
 }
 
-.book-list-item:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-raised);
+.shelf-empty-icon {
+  color: var(--gold);
+  opacity: 0.8;
+  margin-bottom: 0.4rem;
 }
 
-.book-list-item:focus-visible {
-  outline: 2px solid var(--color-accent-primary);
-  outline-offset: 2px;
+.shelf-empty-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--paper);
+}
+
+.shelf-empty-body {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--paper-faint);
+}
+
+.shelf-empty-body code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85em;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--r-sm);
+  background: rgba(230, 184, 115, 0.12);
+  color: var(--gold-bright);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .book-list-item {
+  .shelf-slot {
     transition: none;
-  }
-}
-
-@media (max-width: 640px) {
-  .book-list {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem;
   }
 }
