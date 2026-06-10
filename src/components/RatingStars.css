@@ -1,50 +1,47 @@
 .rating-stars {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.18rem;
 }
 
 .rating-stars-star {
   position: relative;
   display: inline-block;
-  width: 1.1rem;
-  height: 1.1rem;
+  font-size: 0.95rem;
   line-height: 1;
 }
 
-.rating-stars-star-base,
+.rating-stars-star-base {
+  color: rgba(28, 22, 16, 0.18);
+}
+
+/* Inside the dark modal plate, empty stars need a light ghost tint */
+.book-modal-plate-rating .rating-stars-star-base {
+  color: rgba(244, 236, 221, 0.22);
+}
+
 .rating-stars-star-fill {
   position: absolute;
-  inset: 0;
-  font-size: 1.1rem;
-}
-
-.rating-stars-star-base {
-  color: rgba(148, 163, 184, 0.7);
-}
-
-.rating-stars-star-fill {
-  color: var(--color-accent-secondary);
+  top: 0;
+  left: 0;
   overflow: hidden;
   white-space: nowrap;
+  color: var(--gold);
+  text-shadow: 0 0 8px rgba(216, 169, 78, 0.45);
+}
+
+.book-modal-plate-rating .rating-stars-star-fill {
+  color: var(--gold-bright);
 }
 
 .rating-stars-label {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
+  margin-left: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
 }
 
-/* Compact size when inside grid card */
-.book-card-rating .rating-stars-star {
-  width: 0.85rem;
-  height: 0.85rem;
-}
-
-.book-card-rating .rating-stars-star-base,
-.book-card-rating .rating-stars-star-fill {
-  font-size: 0.85rem;
-}
-
-.book-card-rating .rating-stars-label {
-  font-size: 0.65rem;
+.book-modal-plate-rating .rating-stars-label {
+  color: rgba(244, 236, 221, 0.65);
 }
