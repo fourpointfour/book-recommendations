@@ -1,6 +1,7 @@
 ---
 title: "The Namesake"
 author: "Jhumpa Lahiri"
+image: "https://covers.openlibrary.org/b/id/10790063-L.jpg"
 rating: "5/5"
 buyLink: "https://amzn.in/d/0a0Frixd"
 ---
